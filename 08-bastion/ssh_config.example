@@ -1,0 +1,12 @@
+Host bastion
+    HostName BASTION_PUBLIC_IP
+    User ec2-user
+    IdentityFile ~/.ssh/cloud-demo.pem
+    IdentitiesOnly yes
+
+Host private
+    HostName PRIVATE_INSTANCE_IP
+    User ec2-user
+    IdentityFile ~/.ssh/cloud-demo.pem
+    IdentitiesOnly yes
+    ProxyJump bastion

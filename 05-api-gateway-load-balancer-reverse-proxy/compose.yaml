@@ -1,0 +1,16 @@
+services:
+  gateway:
+    build: .
+    command: uvicorn gateway:app --host 0.0.0.0 --port 8000
+    ports: ["8000:8000"]
+    environment:
+      API_TOKEN: ${API_TOKEN:-demo-token}
+    depends_on: [service-a, service-b]
+  service-a:
+    build: .
+    command: uvicorn service:app --host 0.0.0.0 --port 8001
+    environment: {SERVICE_NAME: service-a}
+  service-b:
+    build: .
+    command: uvicorn service:app --host 0.0.0.0 --port 8001
+    environment: {SERVICE_NAME: service-b}
